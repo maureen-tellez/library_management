@@ -178,3 +178,12 @@ class PostgreSQLModel:
         if result:
             return result[0]  # Retorna el primer resultado como diccionario
         return None  # Si no hay usuario que coincida
+    def delete_book(self, book_id):
+        try:
+            # Aquí se hace una consulta para eliminar el libro con el ID dado
+            query = "DELETE FROM books WHERE id = %s"
+            self.cursor.execute(query, (book_id,))
+            self.connection.commit()  # Confirmamos la transacción
+            print(f"Libro con ID {book_id} eliminado correctamente.")
+        except Exception as e:
+            print(f"Error al eliminar el libro: {e}")    
